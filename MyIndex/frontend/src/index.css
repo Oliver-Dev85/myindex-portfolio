@@ -1,0 +1,1057 @@
+:root { /* Tema Claro */
+    --bg-color: #ffffff;
+    --text-color: #1f1f1f;
+    --navbar-bg: #ffffff;        /* Laranja Escuro */
+    --primary-color: #ff7a00;    /* Laranja Médio */
+    --secundary-color: #f5f6fa;
+    --card-bg: #f8f9fa;
+    --cor-titulo-exclusiva: #ff7a00;
+    --border-color: #e9ecef;     /* Cinza suave para neutralizar o layout */
+    --input-bg: #f1f3f5;         /* Fundo branco opaco para contraste no light mode */
+    --color-btn-down: rgb(160, 160, 160);
+    --toggle-bg: #f1f3f5;        /* CORRIGIDO: Adicionado fundo para o botão de tema */
+    --toggle-bg-hover: #e9ecef;  /* CORRIGIDO: Adicionado hover para o botão de tema */
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] { /* Tema Escuro */
+    --bg-color: #0f172a;
+    --text-color: #ebebeb;
+    --navbar-bg: #1e293b;
+    --primary-color: #46e5b0;
+    --cor-titulo-exclusiva: #46e5b0;
+    --card-bg: #181818;
+    --border-color: #334155;
+    --color-btn-down: #46e5b0;
+    --toggle-bg: #1e293b;        /* CORRIGIDO: Fundo escuro do botão de tema */
+    --toggle-bg-hover: #334155;  /* CORRIGIDO: Hover escuro do botão de tema */
+    --input-bg: rgba(255, 255, 255, 0.05); /* Fundo sutil translúcido para o tema escuro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    overflow-x: hidden;
+}
+
+
+/* BARRA DE PROGRESSO E CABEÇALHO */
+#progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 1001;
+}
+
+#progress-bar {
+    height: 100%;
+    background: var(--primary-color);
+    width: 0%;
+    transition: width 0.1s ease-out; /* Deixa o preenchimento mais suave ao rolar */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 10%;
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    transition: background-color var(--transition-speed);
+}
+
+.logo { 
+    font-size: 1.35rem;
+    cursor: pointer;
+}
+
+#titulo-dev-oliver {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; 
+    letter-spacing: 2px;
+    color: var(--text-color) !important; /* Força a cor padrão do texto para o DEV */
+    text-transform: uppercase;
+    transition: color var(--transition-speed);
+}
+
+/* Cor do "OLIVER" (Ganha a cor de destaque: Laranja no light / Verde-água no dark) */
+#titulo-dev-oliver span {
+    font-weight: 800; 
+    color: var(--primary-color) !important; /* Força a cor de destaque para o OLIVER */
+    letter-spacing: 0.5px;
+    transition: color var(--transition-speed);
+}
+
+#titulo-dev-oliver:hover {
+    letter-spacing: 3px; 
+    transition: letter-spacing 0.3s ease;
+}
+
+
+.navbar nav ul { 
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color var(--transition-speed);
+}
+
+.navbar nav a:hover { 
+    color: var(--primary-color);
+}
+
+/* Esconde o menu hambúrguer por padrão em telas grandes (Desktop) */
+.menu-toggle {
+    display: none;
+}
+
+/* 4. BOTÃO DE ALTERNAR TEMA (☀️ / 🌙) */
+#theme-toggle { 
+    background-color: var(--toggle-bg);
+    border: 1px solid var(--border-color); /* Uma borda fina que usa a cor neutra do seu tema */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Uma sombra bem sutil para dar o efeito "suave" */
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed), transform 0.2s;
+}
+
+#theme-toggle:hover {
+    background-color: var(--toggle-bg-hover);
+    border-color: var(--primary-color); /* A borda ganha a cor do tema (laranja ou verde-água) */
+    transform: scale(1.05);
+}
+
+#theme-toggle:active {
+    transform: scale(0.95);
+}
+
+
+/* SEÇÕES GERAIS DO MIOLO/MAIN */
+.section-padding {
+    padding: 6rem 10% 4rem 10%;
+}
+
+.sobre-container p {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+main section {
+    position: relative; /* Necessário para posicionar a linha em relação à seção */
+}
+
+/* Cria a borda recuada e centralizada */
+main section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;          /* Cola a linha na base da seção */
+    left: 50%;          /* Move o início da linha para o centro */
+    transform: translateX(-50%); /* Centraliza a linha perfeitamente */
+    width: 80%;         /* Controle do recuo: mude para 70% ou 90% se quiser mais ou menos recuo */
+    height: 2px;        /* Espessura da borda */
+    background-color: var(--border-color); /* Usa a cor do seu sistema de temas */
+}
+
+/* Remove a linha da última seção antes do footer */
+main section:last-of-type::after {
+    display: none;
+}
+
+
+/* BOTÕES */
+.btn-primary, .btn-secondary, .btn-submit, .btn-download-cert {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color var(--transition-speed);
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-submit:hover {
+    transform: translateY(-2px);
+}
+
+/* SEÇÃO HOME (#HOME) */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+
+/* SEÇÃO HABILIDADES */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+
+.skill-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    cursor: default;
+    transition: border-color var(--transition-speed), transform 0.2s;
+}
+
+.skill-card:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.03);
+}
+
+
+/* SEÇÃO PROJETOS */
+.projects-grid { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* O Card do projeto adota layout de 1 coluna por padrão (Mobile-First) */
+.project-card { 
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background-color: var(--card-bg);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color var(--transition-speed);
+}
+
+/* Efeito Hover Premium: o card sobe levemente e ganha sombra e borda iluminada */
+.project-card:hover { 
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.project-image {
+    display: flex;
+    width: 100%;
+}
+
+.project-image img { 
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Corta a imagem proporcionalmente sem distorcer */
+    border-radius: 6px;
+}
+
+.project-content { 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.project-card h3, .project-card h4 { 
+    padding: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-top: 9px;
+}
+
+.project-card p, .project-card ul { 
+    padding: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.project-card ul { 
+    padding-left: 1.5rem; /* Recuo para as bolinhas da lista */
+}
+
+/* Área das Tags das Tecnologias */
+.project-card .techs { 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.techs div { 
+    padding: 0 0 1rem 0;
+}
+
+.techs span { 
+    display: inline-block;
+    background-color: var(--bg-color); /* Ajustado para bater com o tema de fundo atual */
+    font-family: 'Courier New', Courier, monospace; /* Aparência estática de código */
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: default;
+    transition: border-color var(--transition-speed), transform 0.2s;
+}
+
+.techs span:hover { 
+    border-color: var(--primary-color);
+    transform: scale(1.03);
+}
+
+/* Botão de Link / Demo do Projeto */
+.project-card .project-links {
+    padding: 1rem 0 0 0;
+    margin-top: auto; /* Empurra o botão sempre para o final do card */
+}
+
+.project-links a {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #111111 !important; /* Texto escuro fixo para contraste nos dois temas */
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.project-card .project-links a:hover {
+    background-color: var(--primary-color);
+    color: #111111; /* Garante que o texto continue escuro */
+    transform: scale(1.03); /* Mantém apenas o efeito sutil de aumentar */
+}
+
+#future-projects {
+    display: block;
+}
+
+#future-projects .future-content {
+    position: relative;
+    border: 1px solid var(--primary-color); /* Borda laranja (Light) ou verde-água (Dark) */
+    background-color: transparent;
+    padding: 2.5rem 3rem 2.5rem 12%; /* Espaço extra na esquerda (12%) para o foguete */
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    /* Grid que divide o espaço: Texto ocupa tudo o que puder (1fr), Botão ocupa seu próprio tamanho (auto) */
+    display: grid;
+    grid-template-columns: 1fr auto; 
+    gap: 2rem;
+    align-items: center; /* Centraliza verticalmente texto e botão */
+}
+
+/* Caixa que segura o H2 e o P */
+.future-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    text-align: left; 
+}
+
+#future-projects h2 {
+    margin: 0; 
+    font-size: 1.6rem;
+}
+
+#future-projects p {
+    margin: 0; 
+    opacity: 0.8;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Alinhamento do botão na extremidade direita */
+#future-projects .future-content > span {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+}
+
+/* O Botão Premium do GitHub */
+.btn-github-link {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #111111 !important; /* Garante texto escuro para contraste em ambos os temas */
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.2s, filter 0.2s;
+    white-space: nowrap; /* Impede o texto do botão de quebrar em duas linhas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-github-link:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1); /* Dá um leve brilho no hover */
+}
+
+/* Posicionamento do Ícone do Foguete */
+#future-projects .future-icon {
+    position: absolute;
+    left: 4%; /* Fixado na lateral esquerda do card */
+    top: 50%;
+    transform: translateY(-50%); /* Centralização vertical perfeita */
+    font-size: 2.5rem;
+    color: #ff7a00; /* Cor de destaque fixa */
+}
+
+
+
+/* SEÇÃO QUALIFICAÇÕES */
+.certificados-lista {
+    list-style: none;
+}
+
+.certificados-lista li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+}
+
+.btn-view-cert {
+    background-color: transparent;
+    text-align: left;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-view-cert:hover {
+    background-color: var(--color-btn-down);
+    color: #111111; /* Melhora contraste ao passar o mouse */
+}
+
+
+/* SEÇÃO CONTATO */
+.contato-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.input-group {
+    width: 100%;
+}
+
+.contato-form input, 
+.contato-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.contato-form input::placeholder, 
+.contato-form textarea::placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.contato-form input:focus, 
+.contato-form textarea:focus {
+    border-color: var(--primary-color);
+}
+
+.contato-form textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.btn-submit {
+    flex: 1;
+    min-width: 150px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.btn-whatsapp {
+    flex: 1;
+    min-width: 150px;
+    background-color: #25D366; /* Verde oficial do WhatsApp */
+    color: #ffffff;
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.btn-submit:hover, 
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn-submit:active, 
+.btn-whatsapp:active {
+    transform: translateY(0);
+}
+
+
+/* JANELA MODAL POP-UP CERTIFICADOS */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 90%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.modal-content img, .modal-content iframe {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-download-cert {
+    background-color: var(--color-btn-down);
+    color: var(--text-color);
+}
+
+
+
+/* RODAPÉ */
+footer {
+    display: flex;
+    flex-direction: column; /* Organiza os ícones acima e o texto abaixo */
+    align-items: center;    /* Centraliza os blocos na tela */
+    justify-content: center;
+    gap: 1.5rem;            /* DISTÂNCIA PERFEITA */
+    padding: 3rem 10%;      
+    background-color: var(--card-bg); 
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1.5rem;            
+}
+
+.footer-socials a {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    transition: color var(--transition-speed), transform 0.2s;
+    display: inline-block;
+}
+
+.footer-socials a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-align: center;
+}
+
+.icone-instagram:hover {
+    color: #E1306C !important;
+}
+
+.icone-github:hover {
+    color: #6e5494 !important;
+}
+
+.icone-whatsapp:hover {
+    color: #25D366 !important;
+}
+
+
+/* ANIMAÇÕES DE SCROLL E TRANSIÇÃO */
+.revelar {
+    /* Forçado em opacidade total no React temporariamente para evitar quebras se o script JS antigo não rodar */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Se você for implementar uma biblioteca de animação futuramente no React (como framer-motion), usará esta classe: */
+.revelar.animado {
+    opacity: 1;
+    transform: translateY(0);    
+    filter: blur(0);             
+}
+
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.45s; }
+
+
+/* ==========================================================================
+   RESPONSIVIDADE (Mobile - Dispositivos até 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1010;
+        padding: 0.5rem;
+    }
+    
+    .menu-toggle .bar {
+        width: 25px;
+        height: 3px;
+        background-color: var(--text-color);
+        border-radius: 2px;
+        transition: transform var(--transition-speed), opacity var(--transition-speed);
+    }
+
+    /* CORREÇÃO HAMBÚRGUER: Transforma os riscos em "X" quando o menu expande */
+    .menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+    .menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: -100vh; /* Escondido acima da tela */
+        left: 0;
+        width: 100%;
+        height: auto;
+        background-color: var(--navbar-bg);
+        border-bottom: 2px solid var(--border-color);
+        padding: 2.5rem 0;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        transition: top 0.4s ease-in-out;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        top: 65px; /* Alinha logo abaixo da barra principal */
+    }
+
+    .nav-menu ul {
+        flex-direction: column; 
+        gap: 1.8rem;
+    }
+
+    .nav-menu a {
+        font-size: 1.2rem;
+    }
+
+    .section-padding {
+        padding: 5rem 6% 3rem 6%;
+    }
+
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.3rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+    
+    #future-projects .future-content {
+        grid-template-columns: 1fr; 
+        padding: 5rem 2rem 2rem 2rem; 
+        text-align: center;
+    }
+    
+    .future-text-wrapper {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    
+    #future-projects .future-content > span {
+        justify-self: center; 
+        width: 100%;
+    }
+    
+    .btn-github-link {
+        width: 100%; 
+        text-align: center;
+    }
+    
+    #future-projects .future-icon {
+        top: 2.5rem; 
+        left: 50%;
+        transform: translateX(-50%); 
+    }
+
+    .certificados-lista li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .btn-view-cert {
+        width: 100%;
+        text-align: center;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-submit, 
+    .btn-whatsapp {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (Desktop - Dispositivos a partir de 900px)
+   ========================================================================== */
+@media (min-width: 900px) {
+    .project-card {
+        grid-template-columns: 1fr 1fr; 
+    }
+}
+
+/* ==========================================================================
+   ESTILOS DO CHATBOX INTELIGENTE (MYINDEX)
+   ========================================================================== */
+.chatbox-wrapper {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 2000;
+    font-family: 'Inter', sans-serif;
+}
+
+.chatbox-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: #111111;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color var(--transition-speed);
+}
+
+.chatbox-toggle:hover {
+    transform: scale(1.08);
+}
+
+.chatbox-window {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeInChat 0.3s ease-out;
+}
+
+@keyframes fadeInChat {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chatbox-header {
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chatbox-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.chatbox-header h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.chatbox-header span {
+    font-size: 0.75rem;
+    color: #25D366;
+    font-weight: 500;
+}
+
+.chatbox-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.chatbox-message-row {
+    display: flex;
+    width: 100%;
+}
+
+.chatbox-message-row.bot {
+    justify-content: flex-start;
+}
+
+.chatbox-message-row.user {
+    justify-content: flex-end;
+}
+
+.chatbox-bubble {
+    max-width: 80%;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.chatbox-message-row.bot .chatbox-bubble {
+    background-color: var(--border-color);
+    color: var(--text-color);
+    border-top-left-radius: 2px;
+}
+
+.chatbox-message-row.user .chatbox-bubble {
+    background-color: var(--primary-color);
+    color: #111111;
+    border-top-right-radius: 2px;
+    font-weight: 500;
+}
+
+.chatbox-quick-options {
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+}
+
+.chatbox-quick-options button {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.4rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.chatbox-quick-options button:hover {
+    border-color: var(--primary-color);
+    background-color: var(--border-color);
+}
+
+.chatbox-input-area {
+    display: flex;
+    padding: 0.75rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--navbar-bg);
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chatbox-input-area input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.chatbox-input-area button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+@media (max-width: 480px) {
+    .chatbox-window {
+        width: calc(100vw - 40px);
+        right: -10px;
+        height: 450px;
+    }
+}

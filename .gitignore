@@ -1,0 +1,14 @@
+# Ignorar dependências pesadas
+node_modules/
+dist/
+.cache/
+
+# CRUCIAL: Ignorar arquivos de senhas e chaves de API
+.env
+.env.local
+.env.production
+.env.development
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

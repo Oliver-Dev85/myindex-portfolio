@@ -1,0 +1,3 @@
+Esse projeto é uma atualização do Projeto Original, INDEX.
+
+Basicamente, o objetivo é transformar o site feito em código puro do vanila.js (html, css e JavaScript), para uma versão mais moderna, usando Node.js, React, TypeScript, e etc.
