@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import ChatBox from './ChatBox';
 
-// Se você tiver a imagem do projeto salva em assets, pode importá-la assim:
+// Se tiver a imagem do projeto salva em assets, pode importá-la assim:
 // import projectImg from './assets/project-img-html.png'
 
 function App() {
